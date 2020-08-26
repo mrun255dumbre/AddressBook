@@ -7,7 +7,7 @@ public interface AddressBookInterface {
 	
 	public HashMap<String, ArrayList<Person>> addPerson(String fileName);
 	public void editPerson(String fileName);
-	public void deletePerson();
+	public void deletePerson(String fileName);
 	public void searchPerson(); 
 	public void sortByZip();
 	public void sortByName();

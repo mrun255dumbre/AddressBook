@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -143,7 +144,42 @@ public class AddressBookImplementation implements AddressBookInterface {
 	}
 	
 	@Override
-	public void deletePerson() {
+	public void deletePerson(String fileName) {
+		
+		System.out.println("Enter Number for Delete");
+		String lineToRemove = sc.next();
+		
+		File inFile = new File((fileName+".csv"));
+		File tempFile = new File(fileName+".tmp");
+		
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader(inFile));
+			PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				if (!line.trim().contains(lineToRemove)) {
+					pw.println(line);
+					pw.flush();
+				}
+			}
+			pw.close();
+			br.close();
+
+			inFile.delete();
+			
+			System.out.println("Data deleted From AddressBook");
+			tempFile.renameTo(inFile);
+			System.out.println(" ");
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
