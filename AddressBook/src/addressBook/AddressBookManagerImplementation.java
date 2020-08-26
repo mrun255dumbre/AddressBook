@@ -113,7 +113,7 @@ public class AddressBookManagerImplementation implements AddressBookManagerInter
 				break;
 				
 			case 2:
-				addressBookImplementation.editPerson();
+				addressBookImplementation.editPerson(fileName);
 				break;
 			case 3:
 				addressBookImplementation.deletePerson();
