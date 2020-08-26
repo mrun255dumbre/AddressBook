@@ -122,10 +122,10 @@ public class AddressBookManagerImplementation implements AddressBookManagerInter
 				addressBookImplementation.searchPerson(fileName);
 				break;
 			case 5:
-				addressBookImplementation.sortByZip();
+				addressBookImplementation.sortByZip(fileName);
 				break;
 			case 6:
-				addressBookImplementation.sortByName();
+				addressBookImplementation.sortByName(fileName);
 				break;
 			case 7:
 				addressBookImplementation.display();

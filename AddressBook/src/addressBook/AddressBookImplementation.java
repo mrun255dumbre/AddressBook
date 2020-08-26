@@ -10,6 +10,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -224,14 +225,92 @@ public class AddressBookImplementation implements AddressBookInterface {
 	}
 
 	@Override
-	public void sortByZip() {
-		// TODO Auto-generated method stub
+	public void sortByZip(String fileName) {
+		
+		File inFile = new File((fileName+".csv"));
+		
+		BufferedReader reader;
+		try {
+			reader = new BufferedReader(new FileReader(inFile));
+		
+		ArrayList<Person> lines2 = new ArrayList<Person>();
+		
+		String currentLine1 = reader.readLine();
+		
+		String currentLine = reader.readLine();
+		
+		while (currentLine != null) {
+			String[] persondrtails = currentLine.split(",");
+			String firstname = persondrtails[0];
+			String lastname = persondrtails[1];
+			String city = persondrtails[2];
+			String state = persondrtails[3];
+			int zipcode = Integer.valueOf(persondrtails[4]);
+			String phonenumber = persondrtails[5];
+			lines2.add(new Person(firstname, lastname, city, state, zipcode, phonenumber));
+			currentLine = reader.readLine();
+		}
+		Collections.sort(lines2, new SortByZip());
+		System.out.println("Data after Sort By Zip: ");
+		for (Person P : lines2) {
+			System.out.println(P.getFirstname() + " " + P.getLastname() + " " + P.getCity() + " " + P.getState() + " "
+					+ P.getZipcode() + " " + P.getPhonenumber());
+		}
+		System.out.println("");
+		reader.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
 	@Override
-	public void sortByName() {
-		// TODO Auto-generated method stub
+	public void sortByName(String fileName) {
+		
+		File inFile = new File((fileName+".csv"));
+
+		BufferedReader reader;
+		try {
+		
+			reader = new BufferedReader(new FileReader(inFile));
+		
+		ArrayList<Person> lines = new ArrayList<Person>();
+		String currentLine1 = reader.readLine(); // for ignore the first Line
+		
+		String currentLine = reader.readLine();
+		
+		while (currentLine != null) {
+			String[] persondrtails = currentLine.split(",");
+			String firstname = persondrtails[0];
+			String lastname = persondrtails[1];
+			String city = persondrtails[2];
+			String state = persondrtails[3];
+			int zipcode = Integer.valueOf(persondrtails[4]);
+			String phonenumber = persondrtails[5];
+			lines.add(new Person(firstname, lastname, city, state, zipcode, phonenumber));
+			currentLine = reader.readLine();
+		}
+		
+		Collections.sort(lines, new SortByName());
+		System.out.println("Data after Sort By Name: ");
+		for (Person P : lines) {
+			System.out.println(P.getFirstname() + " " + P.getLastname() + " " + P.getCity() + " " + P.getState() + " "
+					+ P.getZipcode() + " " + P.getPhonenumber());
+		}
+		
+		System.out.println("");
+		reader.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
