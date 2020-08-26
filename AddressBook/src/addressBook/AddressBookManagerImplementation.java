@@ -164,19 +164,55 @@ public class AddressBookManagerImplementation implements AddressBookManagerInter
 
 	@Override
 	public void saveAsAddressBook() {
-		// TODO Auto-generated method stub
+		
+		System.out.println("AddressBook Present in System \n");
+		File f = new File(".");
+		String[] s = f.list();
+		
+		for (String s1 : s) {
+			System.out.println(s1);
+		}
+		
+		System.out.println("Please enter name which book want to rename");
+		String filename = sc.next();
+		
+		System.out.println("please enter new name of book");
+		String newname = sc.next();
+		
+		File oldFile = new File((filename + ".csv"));
+		File newFile = new File(newname + ".csv");
+		
+		boolean b = oldFile.renameTo(newFile);
+		
+		if (b==true) {
+			System.out.println("You have changed the "+oldFile+" to the "+newFile);
+		} 
+		else
+		{
+			System.out.println("Please Check Opration failed.");
+
+		}
+
 		
 	}
 
 	@Override
 	public void closeAddressBook() {
-		// TODO Auto-generated method stub
+		
+		try {
+			fileWriter.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("AddressBook Closed");
 		
 	}
 
 	@Override
 	public void quit() {
-		// TODO Auto-generated method stub
+		
+		System.exit(0);
 		
 	}
 	
