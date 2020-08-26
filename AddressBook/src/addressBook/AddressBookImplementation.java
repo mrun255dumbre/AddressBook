@@ -21,7 +21,7 @@ public class AddressBookImplementation implements AddressBookInterface {
 	int flag = 0;
 	public static File file;
 	Scanner sc = new Scanner(System.in);
-	
+	Scanner scanner;
 	public ArrayList<Person> personArrayList = new ArrayList<Person>(100);
 	public HashMap<String, ArrayList<Person>> personHashMap = new HashMap<>(100);
 	
@@ -315,8 +315,25 @@ public class AddressBookImplementation implements AddressBookInterface {
 	}
 
 	@Override
-	public void display() {
-		// TODO Auto-generated method stub
+	public void display(String fileName) {
+		
+		System.out.println("Data Present in System :");
+		
+		try {
+			scanner = new Scanner(new File(fileName+".csv"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		while (scanner.hasNextLine()) {
+			String line = scanner.nextLine();
+			System.out.println(line);
+		}
+		
+		System.out.println(" \n\n");
+		file.exists();
+		scanner.close();
 		
 	}
 

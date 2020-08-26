@@ -128,7 +128,7 @@ public class AddressBookManagerImplementation implements AddressBookManagerInter
 				addressBookImplementation.sortByName(fileName);
 				break;
 			case 7:
-				addressBookImplementation.display();
+				addressBookImplementation.display(fileName);
 				break;
 			default:
 				System.out.println("Wrong Choice. Please Check Your Choice");
