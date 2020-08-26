@@ -25,6 +25,8 @@ public class AddressBookImplementation implements AddressBookInterface {
 	public HashMap<String, ArrayList<Person>> personHashMap = new HashMap<>(100);
 	
 	public String patternPhone = "^[6-9]{1}[0-9]{9}";
+	BufferedReader br;
+	BufferedWriter bw;
 	
 	@Override
 	public HashMap<String, ArrayList<Person>> addPerson(String fileName) {
@@ -75,8 +77,7 @@ public class AddressBookImplementation implements AddressBookInterface {
 		File inFile = new File((fileName+".csv"));
 		File tempFile = new File(fileName + ".tmp");
 		
-		BufferedReader br;
-		BufferedWriter bw;
+
 		try {
 			br = new BufferedReader(new FileReader(inFile));
 			bw = new BufferedWriter(new FileWriter(tempFile));
@@ -184,8 +185,41 @@ public class AddressBookImplementation implements AddressBookInterface {
 	}
 
 	@Override
-	public void searchPerson() {
-		// TODO Auto-generated method stub
+	public void searchPerson(String fileName) {
+		
+		File input = new File((fileName+".csv"));
+		FileReader fr = null;
+		Scanner ob = new Scanner(System.in);
+
+		flag=0;
+		
+		String search, str;
+		
+		System.out.println("Please enter phone number for search :");
+		search = ob.nextLine();
+		
+		try {
+			fr = new FileReader(input);
+		
+		br = new BufferedReader(fr);
+		while ((str = br.readLine()) != null) {
+			if (str.contains(search)) {
+				flag++;
+				System.out.println("Record found: \n" + str);
+			}
+		}
+		if(flag==0)
+			System.out.println("Phone Number not exist!");
+
+		fr.close();
+		br.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

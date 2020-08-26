@@ -119,7 +119,7 @@ public class AddressBookManagerImplementation implements AddressBookManagerInter
 				addressBookImplementation.deletePerson(fileName);
 				break;
 			case 4:
-				addressBookImplementation.searchPerson();
+				addressBookImplementation.searchPerson(fileName);
 				break;
 			case 5:
 				addressBookImplementation.sortByZip();
