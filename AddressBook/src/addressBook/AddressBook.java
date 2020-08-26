@@ -1,5 +1,9 @@
 package addressBook;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
 
 public class AddressBook {
@@ -23,6 +27,9 @@ public class AddressBook {
 		AddressBookImplementation addressBookImplementation = new AddressBookImplementation();
 		AddressBookManagerImplementation addressBookManagerImplementation = new AddressBookManagerImplementation();
 		
+		ArrayList<Person> personArrayList = new ArrayList<Person>(100);
+		HashMap<String, ArrayList<Person>> personHashMap = new HashMap<>(100);
+		
 		Scanner sc= new Scanner(System.in);
 		
 		while(true) {
@@ -38,11 +45,21 @@ public class AddressBook {
 					break;
 				
 				case OPEN_ADDRESS_BOOK:
-					addressBookManagerImplementation.openAddressBook();
+					personHashMap = addressBookManagerImplementation.openAddressBook();
+					@SuppressWarnings("rawtypes") 
+					Iterator it = personHashMap.entrySet().iterator();
+					
+					while (it.hasNext()) {
+						
+						@SuppressWarnings("rawtypes")
+						Map.Entry pair = (Map.Entry) it.next();
+						filename=(String) pair.getKey();
+						personArrayList=(ArrayList<Person>) pair.getValue();
+					}
 					break;
 					
 				case SAVE_ADDRESS_BOOK:
-					addressBookManagerImplementation.saveAddressBook();
+					addressBookManagerImplementation.saveAddressBook(filename,personArrayList);
 					break;
 				
 				case SAVE_AS_ADDRESS_BOOK:

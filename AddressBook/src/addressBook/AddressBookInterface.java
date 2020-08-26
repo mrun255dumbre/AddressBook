@@ -1,9 +1,11 @@
 package addressBook;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface AddressBookInterface {
 	
-	public void addPerson();
+	public HashMap<String, ArrayList<Person>> addPerson(String fileName);
 	public void editPerson();
 	public void deletePerson();
 	public void searchPerson(); 
